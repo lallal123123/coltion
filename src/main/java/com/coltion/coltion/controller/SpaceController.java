@@ -18,6 +18,7 @@ public class SpaceController {
 		this.spaceService=spaceService;
 	}
 
+	//워크스페이스 등록
 	@PostMapping("/workspace")
 	public ResponseEntity<?> insertWorkspace(){
 		
@@ -31,6 +32,7 @@ public class SpaceController {
 		return ResponseEntity.ok().body("성공");
 	}
 	
+	//개별 워크스페이스 조회(by workspaceNo)
 	@GetMapping("/workspace/{workspaceNo}")
 	public ResponseEntity<?> getWorkspace(@PathVariable("workspaceNo") String workspaceNo ){
 		

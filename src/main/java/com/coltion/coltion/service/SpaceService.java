@@ -13,10 +13,12 @@ public class SpaceService {
 		this.spaceDao = spaceDao;
 	}
 
+	//워크스페이스 등록
 	public void insertWorkspace(WorkspaceDto workspaceDto) {
 		spaceDao.insertWorkspace(workspaceDto);
 	}
 	
+	//개별 워크스페이스 조회(by workspaceNo)
 	public WorkspaceDto getWorkspace(String workspaceNo) {
 		WorkspaceDto workspaceDto =spaceDao.getWorkspace(workspaceNo);
 		return workspaceDto;
