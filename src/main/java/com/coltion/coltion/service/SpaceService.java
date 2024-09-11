@@ -1,5 +1,7 @@
 package com.coltion.coltion.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.coltion.coltion.dao.SpaceDao;
@@ -22,5 +24,11 @@ public class SpaceService {
 	public WorkspaceDto getWorkspace(String workspaceNo) {
 		WorkspaceDto workspaceDto =spaceDao.getWorkspace(workspaceNo);
 		return workspaceDto;
+	}
+	
+	//이메일별 워크스페이스 조회
+	public List<WorkspaceDto> getWorkspaceByEmail(String email){
+		List<WorkspaceDto> list = spaceDao.getWorkspaceByEmail(email);
+		return list;
 	}
 }

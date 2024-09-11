@@ -1,9 +1,12 @@
 package com.coltion.coltion.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +23,9 @@ public class SpaceController {
 
 	//워크스페이스 등록
 	@PostMapping("/workspace")
-	public ResponseEntity<?> insertWorkspace(){
+	public ResponseEntity<?> insertWorkspace(@RequestBody WorkspaceDto workspaceDto){
 		
-		WorkspaceDto workspaceDto = new WorkspaceDto();
-		workspaceDto.setEmail("test1@naver.com");
-		workspaceDto.setWorkspaceName("defalut");
+		System.out.println(workspaceDto.getEmail());
 		spaceService.insertWorkspace(workspaceDto);
 		
 		
@@ -39,5 +40,13 @@ public class SpaceController {
 		WorkspaceDto workspaceDto =spaceService.getWorkspace(workspaceNo);
 		
 		return ResponseEntity.ok().body(workspaceDto);
+	}
+	
+	//이메일별 워크스페이스 조회
+	@GetMapping("/workspace/email/{email}")
+	public ResponseEntity<?> getWorkspaceByEmail(@PathVariable("email") String email){
+		
+		List<WorkspaceDto> list = spaceService.getWorkspaceByEmail(email);
+		return ResponseEntity.ok().body(list);
 	}
 }
