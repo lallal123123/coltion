@@ -17,4 +17,10 @@ public interface SpaceDao {
 	
 	//이메일별 워크스페이스 조회
 	public List<WorkspaceDto> getWorkspaceByEmail(@Param("email") String email);
+	
+	//워크스페이스 이름 수정
+	public void updateWorkspace(@Param("dto") WorkspaceDto workspace);
+	
+	//워크스페이스 삭제
+	public void deleteWorkspace(@Param("workspaceNo") String workspaceNo);
 }

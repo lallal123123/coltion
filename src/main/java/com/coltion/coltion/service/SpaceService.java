@@ -31,4 +31,14 @@ public class SpaceService {
 		List<WorkspaceDto> list = spaceDao.getWorkspaceByEmail(email);
 		return list;
 	}
+	
+	//워크스페이스 이름 수정
+	public void updateWorkspace(WorkspaceDto workspaceDto) {
+		spaceDao.updateWorkspace(workspaceDto);
+	}
+	
+	//워크스페이스 삭제
+	public void deleteWorkspace(String workspaceNo) {
+		spaceDao.deleteWorkspace(workspaceNo);
+	}
 }
