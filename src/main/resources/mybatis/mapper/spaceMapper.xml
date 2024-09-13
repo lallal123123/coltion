@@ -13,4 +13,19 @@
   <select id="getWorkspace" resultType="com.coltion.coltion.dto.WorkspaceDto">
   	select * from workspace where workspace_no =#{workspaceNo};
   </select>
+  
+  <!--이메일 워크스페이스 조회 -->
+  <select id="getWorkspaceByEmail" resultType="com.coltion.coltion.dto.WorkspaceDto">
+  	select * from workspace where email =#{email};
+  </select>
+  
+  <!--워크스페이스 수정 -->
+  <update id="updateWorkspace">
+  	update workspace set workspace_name = #{dto.workspaceName} where workspace_no = #{dto.workspaceNo};
+  </update>
+  
+  <!-- 워크스페이스 삭제 -->
+  <delete id="deleteWorkspace">
+  	delete from workspace where workspace_no = #{workspaceNo}; 
+  </delete>
 </mapper>

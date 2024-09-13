@@ -1,5 +1,7 @@
 package com.coltion.coltion.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +14,13 @@ public interface SpaceDao {
 	
 	//개별 워크스페이스 조회(by workspaceNo)
 	public WorkspaceDto getWorkspace(@Param("workspaceNo") String workspaceNo );
+	
+	//이메일별 워크스페이스 조회
+	public List<WorkspaceDto> getWorkspaceByEmail(@Param("email") String email);
+	
+	//워크스페이스 이름 수정
+	public void updateWorkspace(@Param("dto") WorkspaceDto workspace);
+	
+	//워크스페이스 삭제
+	public void deleteWorkspace(@Param("workspaceNo") String workspaceNo);
 }
