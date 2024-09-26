@@ -6,17 +6,39 @@
 
 	<!-- 생성 시 데이터 공백으로 할 일 생성 -->
 	<insert id="insertSchedule">
-		insert into schedule_management	(teamspace_no) values (#{dto.teamspaceNo})
+		insert into schedule_management (teamspace_no) values
+		(#{dto.teamspaceNo})
 	</insert>
-	
+
 	<!-- teamspace 내 할 일 목록 출력 -->
-	<select id="getScheduleByteamspaceNo" resultType="com.coltion.coltion.dto.ScheduleManagementDto">
-		select * from schedule_management where teamspace_no = #{teamspaceNo}
-	</select>
-	
-	<!-- teamspace 내 담당자 할 일 목록 출력(email) -->
-	<select id="getScheduleByemail" resultType="com.coltion.coltion.dto.ScheduleManagementDto">
-		select * from schedule_management where teamspace_no = #{teamspaceNo} and person_in_charge = #{email}
+	<select id="getScheduleByteamspaceNo"
+		resultType="com.coltion.coltion.dto.ScheduleManagementDto">
+		select * from schedule_management where teamspace_no =
+		#{teamspaceNo}
 	</select>
 
+	<!-- teamspace 내 담당자 할 일 목록 출력(email) -->
+	<select id="getScheduleByemail"
+		resultType="com.coltion.coltion.dto.ScheduleManagementDto">
+		select * from schedule_management where teamspace_no =
+		#{teamspaceNo} and person_in_charge = #{email}
+	</select>
+
+	<!-- 할 일 업데이트 -->
+	<update id="updateSchedule">
+		update schedule_management
+		<set>
+			<if test="dto.state != null">state = #{dto.state},</if>
+			<if test="dto.scheduleTitle != null">schedule_title = #{dto.scheduleTitle},</if>
+			<if test="dto.personInCharge != null">person_in_charge = #{dto.personInCharge},</if>
+			<if test="dto.startAbout != null">start_about = #{dto.startAbout},</if>
+			<if test="dto.startReal != null">start_real = #{dto.startReal},</if>
+			<if test="dto.endAbout != null">end_about = #{dto.endAbout},</if>
+			<if test="dto.endReal != null">end_real = #{dto.endReal},</if>
+			<if test="dto.ranking != null">ranking = #{dto.ranking},</if>
+			updated_date = NOW(),
+			<if test="dto.description != null">description = #{dto.description},</if>
+		</set>
+		WHERE schedule_management_no = #{dto.scheduleManagementNo}
+	</update>
 </mapper>

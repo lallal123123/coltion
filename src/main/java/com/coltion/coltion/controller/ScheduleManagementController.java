@@ -3,8 +3,10 @@ package com.coltion.coltion.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,5 +42,18 @@ public class ScheduleManagementController {
 	public ResponseEntity<?> getScheduleByemail(@PathVariable("teamspaceNo") int teamspaceNo, @PathVariable("email") String email){
 		List<ScheduleManagementDto> data = scheduleService.getScheduleByemail(teamspaceNo, email);
 		return ResponseEntity.ok(data);
+	}
+	
+	//할 일 업데이트
+	@PatchMapping("/schedule/{scheduleManagementNo}")
+	public ResponseEntity<String> updateSchedule(@PathVariable("scheduleManagementNo") int scheduleManagementNo, @RequestBody ScheduleManagementDto scheduleManagementDto){
+		scheduleManagementDto.setScheduleManagementNo(scheduleManagementNo);
+		int updatedRows = scheduleService.updateSchedule(scheduleManagementDto);
+		
+		if(updatedRows > 0) {
+			return ResponseEntity.ok("업데이트 성공");
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일정을 찾을 수 없습니다");
+		}
 	}
 }
