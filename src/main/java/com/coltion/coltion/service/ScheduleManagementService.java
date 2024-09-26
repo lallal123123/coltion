@@ -32,4 +32,9 @@ public class ScheduleManagementService {
 		
 		return list;
 	}
+	
+	//할 일 업데이트 
+	public int updateSchedule(ScheduleManagementDto scheduleManagementDto) {
+		return scheduleManagementDao.updateSchedule(scheduleManagementDto);
+	}
 }
