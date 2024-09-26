@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coltion.coltion.dto.TeamspaceDto;
 import com.coltion.coltion.dto.WorkspaceDto;
 import com.coltion.coltion.service.SpaceService;
 
@@ -23,6 +24,8 @@ public class SpaceController {
 		this.spaceService=spaceService;
 	}
 
+	////워크스페이스 
+	
 	//워크스페이스 등록
 	@PostMapping("/workspace")
 	public ResponseEntity<?> insertWorkspace(@RequestBody WorkspaceDto workspaceDto){
@@ -56,5 +59,36 @@ public class SpaceController {
 	public ResponseEntity<?> deleteWorkspace(@PathVariable("workspaceNo") String workspaceNo){
 		spaceService.deleteWorkspace(workspaceNo);
 		return ResponseEntity.ok().body("워크스페이스 삭제 성공");
+	}
+	
+	
+	////팀스페이스 
+	
+	//팀스페이스 등록
+	@PostMapping("/teamspace")
+	public ResponseEntity<?> insertTeamspace(@RequestBody TeamspaceDto teamspaceDto) {
+		spaceService.insertTeamspace(teamspaceDto);
+		return ResponseEntity.ok().body("팀스페이스 등록 성공");
+	}
+	
+	//워크스페이스별 팀스페이스 조회(by workspaceNo)
+	@GetMapping("/teamspace/workspace/{workspaceNo}")
+	public ResponseEntity<?> getTeamspaceByWorkspaceNo(@PathVariable("workspaceNo")String workspaceNo) {
+		List<TeamspaceDto> list = spaceService.getTeamspaceByWorkspaceNo(workspaceNo);
+		return ResponseEntity.ok().body(list);
+	}
+	
+	//팀스페이스 이름 수정
+	@PutMapping("/teamspace")
+	public ResponseEntity<?> updateTeamspace(@RequestBody TeamspaceDto teamspaceDto){
+		spaceService.updateTeamspace(teamspaceDto);
+		return ResponseEntity.ok().body("팀스페이스 수정 성공");
+	}
+	
+	//팀스페이스 삭제
+	@DeleteMapping("/teamspace/{teamspaceNo}")
+	public ResponseEntity<?> deleteTeamspace(@PathVariable("teamspaceNo") String teamspaceNo){
+		spaceService.deleteTeamspace(teamspaceNo);
+		return ResponseEntity.ok().body("팀스페이스 삭제 성공");
 	}
 }
