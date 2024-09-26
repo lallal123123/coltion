@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coltion.coltion.dao.SpaceDao">
+
+  <!--워크스페이스 등록  -->
+  <insert id="insertWorkspace">
+    insert into workspace values(null,#{dto.email},#{dto.workspaceName});
+  </insert>
+  
+  <!--개별 워크스페이스 조회(by workspaceNo)  -->
+  <select id="getWorkspace" resultType="com.coltion.coltion.dto.WorkspaceDto">
+  	select * from workspace where workspace_no =#{workspaceNo};
+  </select>
+  
+  <!--이메일 워크스페이스 조회 -->
+  <select id="getWorkspaceByEmail" resultType="com.coltion.coltion.dto.WorkspaceDto">
+  	select * from workspace where email =#{email};
+  </select>
+  
+  <!--워크스페이스 수정 -->
+  <update id="updateWorkspace">
+  	update workspace set workspace_name = #{dto.workspaceName} where workspace_no = #{dto.workspaceNo};
+  </update>
+  
+  <!-- 워크스페이스 삭제 -->
+  <delete id="deleteWorkspace">
+  	delete from workspace where workspace_no = #{workspaceNo}; 
+  </delete>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.coltion.coltion.dao.TeamspaceMemberDao">
+
+  <!-- 멤버 등록 -->
+  <insert id="insertMember">
+  	insert into teamspace_member values(null, #{dto.teamspaceNo}, #{dto.email}, #{dto.role});
+  </insert>
+  
+  <!-- 멤버 이메일 조회 -->
+  <select id="selectEmailMember" resultType="com.coltion.coltion.dto.TeamspaceMemberDto">
+  	select * from teamspace_member where email =#{email};
+  </select>
+  
+  <!-- 멤버 수정 -->
+  <update id="d"></update>
+  
+  <!-- 멤버 삭제 -->
+  <delete id="sd"></delete>
+  
+  </mapper>
