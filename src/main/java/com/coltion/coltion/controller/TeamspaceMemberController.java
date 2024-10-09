@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coltion.coltion.dto.TeamspaceMemberDto;
 import com.coltion.coltion.service.TeamspaceMemberService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class TeamspaceMemberController {
@@ -21,13 +23,26 @@ public class TeamspaceMemberController {
 	public TeamspaceMemberController(TeamspaceMemberService memberService) {
 		this.memberService = memberService;
 	}
-	
+
+
+
 	@PostMapping("/member")
 	public ResponseEntity<String> insertMember(@RequestBody TeamspaceMemberDto teamspaceMemberDto) {
 		memberService.insert(teamspaceMemberDto);
 		
 		return new ResponseEntity<>("회원이 성공적으로 등록되었습니다.", HttpStatus.CREATED);
-		
+	}
+
+
+
+
+
+
+	@GetMapping("/member/list")
+	public List<TeamspaceMemberDto> selectAllMember(
+			@RequestParam TeamspaceMemberDto teamspaceMemberDto
+	) {
+		return memberService.selectList(teamspaceMemberDto);
 	}
 	
 	@GetMapping("/member")

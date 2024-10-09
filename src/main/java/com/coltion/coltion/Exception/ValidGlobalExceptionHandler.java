@@ -19,12 +19,10 @@ public class ValidGlobalExceptionHandler {
         ResultCode resultCode = new ResultCode(Common.FAIL);
         return new ResponseEntity<>(resultCode, HttpStatus.BAD_REQUEST);
     }
-
     // 기타 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResultCode> handleGlobalException(Exception ex, WebRequest request) {
         // 서버 에러 시 Common.SERVER_ERROR 응답
-
         ResultCode resultCode = new ResultCode(Common.SERVER_ERROR);
         return new ResponseEntity<>(resultCode, HttpStatus.INTERNAL_SERVER_ERROR);
     }

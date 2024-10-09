@@ -13,7 +13,28 @@
   <select id="selectEmailMember" resultType="com.coltion.coltion.dto.TeamspaceMemberDto">
   	select * from teamspace_member where email =#{email};
   </select>
-  
+  <select id="getTotalCount"  parameterType="com.coltion.coltion.dto.TeamspaceMemberDto" resultType="int">
+  	select count(*) from teamspace_member
+      where 1=1
+      <if test="teamspaceNo != null">
+          and teamspace_no = #{teamspaceNo}
+      </if>
+    <if test="email != null">
+    	and email = #{email};
+    </if>
+
+    </select>
+  <select id="selectMemberList" parameterType="com.coltion.coltion.dto.TeamspaceMemberDto" resultType="com.coltion.coltion.dto.TeamspaceMemberDto">
+  	select teamspace_no, email from teamspace_member
+      where 1=1
+      <if test="teamspaceNo != null">
+          and teamspace_no = #{teamspaceNo}
+      </if>
+    <if test="email != null">
+    	and email = #{email}
+    </if>
+      limit #{size} offset #{currentIdx}
+  </select>
   <!-- 멤버 수정 -->
   <update id="d"></update>
   

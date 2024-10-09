@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TeamspaceMemberDto {
+public class TeamspaceMemberDto  extends  BoardExtension{
 
 	private Long teamspaceMemberNo;
 	private Long teamspaceNo;

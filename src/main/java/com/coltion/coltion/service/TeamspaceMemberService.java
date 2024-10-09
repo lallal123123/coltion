@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.coltion.coltion.dao.TeamspaceMemberDao;
 import com.coltion.coltion.dto.TeamspaceMemberDto;
 
+import java.util.List;
+
 @Service
 public class TeamspaceMemberService {
 
@@ -23,4 +25,17 @@ public class TeamspaceMemberService {
 	public void emailSelect(String email) {
 		memberDao.selectEmailMember(email);
 	}
+
+	//멤버 전체 조회
+	public List<TeamspaceMemberDto> selectList(TeamspaceMemberDto teamspaceMemberDto) {
+		teamspaceMemberDto.setCurrentIdx(teamspaceMemberDto.getSize()*teamspaceMemberDto.getPage());
+		teamspaceMemberDto.setTotalSize(getTotalCount(teamspaceMemberDto));
+		return memberDao.selectMemberList(teamspaceMemberDto);
+	}
+
+	int getTotalCount (TeamspaceMemberDto teamspaceMemberDto){
+		return memberDao.getTotalCount(teamspaceMemberDto);
+	}
+
+
 }
